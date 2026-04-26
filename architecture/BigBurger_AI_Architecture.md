@@ -39,11 +39,14 @@ April 2026 · GCP-Native Architecture
 
 ---
 
-## Slide 3 — High-Level System Architecture
 
-#### High level End to End Architectural Flow
+## Slide 3 — High-Level System Architecture (Image)
 
 ![High level End to End Architectural Flow](../BigBurgerAI%20-%20Architect%20Diagram.png)
+
+---
+
+## Slide 4 — High-Level System Architecture (ASCII Diagram)
 
 ```
 ╔══════════════════════════════════════════════════════════════════════════╗
@@ -66,7 +69,7 @@ April 2026 · GCP-Native Architecture
 ║                    ▼              ▼              ▼                       ║
 ║             [Vector Search  [Vector Search  [Vector Search  [...]        ║
 ║              Index: North]  Index: South]  Index: East]                  ║
-║                    │              │              │                        ║
+║                    │              │              │                       ║
 ║             [Firestore: Document Registry + Version Ledger]              ║
 ╚══════════════════════════════════════════════════════════════════════════╝
 
@@ -77,7 +80,7 @@ April 2026 · GCP-Native Architecture
 ║                                │                                         ║
 ║                                ▼                                         ║
 ║                    [Identity Platform AuthN]                             ║
-║                    + JWT with role/region claims                          ║
+║                    + JWT with role/region claims                         ║
 ║                                │                                         ║
 ║                                ▼                                         ║
 ║                    [Orchestrator Agent]  (Gemini 1.5 Pro / ADK)          ║
@@ -88,13 +91,15 @@ April 2026 · GCP-Native Architecture
 ║                    │           │           │                             ║
 ║              (Vertex AI Vector Search — per-region index)                ║
 ║                                                                          ║
-║  [BigQuery: Query Logs + Feedback]  ◄── [Cloud Monitoring Dashboards]   ║
+║  [BigQuery: Query Logs + Feedback]  ◄── [Cloud Monitoring Dashboards]    ║
 ╚══════════════════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## Slide 4 — Pillar 1: Data Ingestion Pipeline
+---
+
+## Slide 5 — Pillar 1: Data Ingestion Pipeline
 
 ### Triggering: Event-Driven Change Detection
 - **Google Drive API** webhooks push change notifications to a **Pub/Sub** topic per region
@@ -117,7 +122,7 @@ April 2026 · GCP-Native Architecture
 
 ---
 
-## Slide 5 — Pillar 1 (cont.): Sync, Versioning & Deletions
+## Slide 6 — Pillar 1 (cont.): Sync, Versioning & Deletions
 
 ### Document Versioning — Firestore as the Registry
 
@@ -150,7 +155,7 @@ Firestore collection: document_registry/{region}/{doc_id}
 
 ---
 
-## Slide 6 — Pillar 2: AI & Agentic Architecture
+## Slide 7 — Pillar 2: AI & Agentic Architecture
 
 ### Two-Tier Agent Design (Google ADK)
 
@@ -184,7 +189,7 @@ User Query
 
 ---
 
-## Slide 7 — Pillar 2 (cont.): Token Cost, Rate Limits & Latency
+## Slide 8 — Pillar 2 (cont.): Token Cost, Rate Limits & Latency
 
 ### Token Cost Optimization
 | Query Type | Model | Approx. Cost per Query |
@@ -214,7 +219,7 @@ Total:                  ~2,500ms  ✓
 
 ---
 
-## Slide 8 — Pillar 3: Security & Access Control
+## Slide 9 — Pillar 3: Security & Access Control
 
 ### Authentication (AuthN)
 - **Identity Platform** (Firebase Auth) issues signed JWTs
@@ -252,7 +257,7 @@ Layer 2: Storage-layer isolation (Vertex AI Vector Search)
 
 ---
 
-## Slide 9 — Pillar 4: Observability & Evaluation
+## Slide 10 — Pillar 4: Observability & Evaluation
 
 ### Pre-Deployment Accuracy Testing
 
@@ -276,7 +281,7 @@ Layer 2: Storage-layer isolation (Vertex AI Vector Search)
 
 ---
 
-## Slide 10 — Pillar 4 (cont.): Production Monitoring & Feedback Loop
+## Slide 11 — Pillar 4 (cont.): Production Monitoring & Feedback Loop
 
 ### Production Monitoring (Cloud Monitoring + Cloud Logging)
 
@@ -315,7 +320,7 @@ User Submits Answer ──► 👍 / 👎 + Optional Text Correction
 
 ---
 
-## Slide 11 — Design Trade-offs
+## Slide 12 — Design Trade-offs
 
 | Decision | Choice Made | Alternative Considered | Rationale |
 |----------|-------------|----------------------|-----------|
@@ -331,7 +336,7 @@ User Submits Answer ──► 👍 / 👎 + Optional Text Correction
 
 ---
 
-## Slide 12 — Prototype Overview & What Was Built
+## Slide 13 — Prototype Overview & What Was Built
 
 ### Code Prototype: `prototype/`
 
